@@ -1,60 +1,59 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div id="app" class="row align-center justify-around">
+    <pm-header></pm-header>
+    <section class="container">
+      <nav class="nav row">
+        <div class=" row m-t-a-40">
+          <input type="text" class="col-8" placeholder="Buscar canciones" v-model="searchQuery">
+          <a class="button col-4" @click="search">Buscar</a>
+          <a class="button col-4 error-button">&times;</a>
+          <p>
+            <small>{{searchMessage}}</small>
+          </p>
+        </div>
+        <div class="col-16">
+          <ul>
+            <li v-for="t in tracks">{{ t.name}} - {{t.artists[0].name}}</li>
+          </ul>
+        </div>
+      </nav>
+    </section>
+    <pm-footer></pm-footer>
   </div>
+
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  import tracks from './services/track';
+  import PmFooter from './components/layout/Footer.vue'
+  import PmHeader from './components/layout/Header.vue'
+  export default {
+    name: 'app',
+    components: {PmFooter,PmHeader},
+    data() {
+      return {
+        searchQuery: '',
+        tracks: []
+      }
+    },
+    computed: {
+      searchMessage() {
+        return `Encontrados ${this.tracks.length}`
+      }
+    },
+    methods: {
+      search() {
+        this.track = tracks.search(this.searchQuery)
+          .then(res => {
+            console.log(res.tracks.items);
+            this.tracks = res.tracks.items
+          });
+      }
     }
   }
-}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import "./scss/main";
 
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>

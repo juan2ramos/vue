@@ -10,6 +10,9 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "i": "^0.3.6",
+    "inuit-css": "^2.0.5",
+    "trae": "^1.4.2",
     "vue": "^2.5.11"
   },
   "browserslist": [
