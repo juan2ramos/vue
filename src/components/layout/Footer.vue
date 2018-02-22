@@ -1,11 +1,20 @@
 <template lang="html">
-  <footer>
+  <footer class="footer ">
     <div class="container">
       <p class="is-text-center">
-        :fire: kjh qdqwd
+        💻 con ❤️ por @juan2ramos
       </p>
     </div>
   </footer>
 </template>
+
+<style lang="scss">
+  footer{
+    background: #191821;
+    padding: 3rem 0 2rem;
+    color: white;
+  }
+
+</style>
 
 

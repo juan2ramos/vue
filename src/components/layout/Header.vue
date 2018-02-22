@@ -9,9 +9,9 @@
   </header>
 
 </template>
-<style lang="scss">
+<style lang="scss" scoped="true">
   header{
-    background: green;
+    background: #191821;
     color: white;
   }
 </style>

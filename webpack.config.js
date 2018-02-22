@@ -73,6 +73,9 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
     },
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    },
     extensions: ['*', '.js', '.vue', '.json']
   },
   devServer: {
